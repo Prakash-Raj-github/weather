@@ -45,7 +45,7 @@ searchField.addEventListener("input",function () {
     if (searchField.value) {
         searchTimeout = setTimeout(()=> {
 
-            fetchData(url.geo(searchField.value), function (location){
+            fetchData(url.geo(searchField.value), function (locations){
                 searchField.classList.remove("searching");
                 searchResult.classList.add("active");
                 searchResult.innerHTML = `
@@ -166,7 +166,7 @@ export const updateWeather = function (lat, lon) {
         `;
 
         fetchData(url.reverseGeo(lat, lon), function([{ name, country}]){
-            card.querySelector("[data-location]").innerHTML = '${name}, ${country}'
+            card.querySelector("[data-location]").innerHTML = `${name}, ${country}`
         });
 
         currentWeatherSection.appendChild(card);
@@ -345,7 +345,7 @@ export const updateWeather = function (lat, lon) {
                 const [{ icon, description}] = weather
 
                 const tempLi = document.createElement("li");
-                tempLi.classList.add("slider.item");
+                tempLi.classList.add("slider-item");
 
                 tempLi.innerHTML = `
 
@@ -370,7 +370,7 @@ export const updateWeather = function (lat, lon) {
                 windLi.innerHTML= `
                 
                     <div class="card card-sm slider-card">
-                        <p class="body-3">${module.getHours(dateTimeUnix, timezone)}}</p>
+                        <p class="body-3">${module.getHours(dateTimeUnix, timezone)}</p>
 
                         <img src="./assets/images/weather_icons/direction.png" width="48" 
                         height="48" loading="lazy" alt="" class="weather-icon" 
